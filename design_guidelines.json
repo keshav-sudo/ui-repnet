@@ -1,0 +1,122 @@
+{
+  "theme": "Light",
+  "archetype": "4 (Swiss & High-Contrast)",
+  "instructions_to_main_agent": "You are building a landing page for 'AI Copilot for SYSPRO ERP', a SaaS application targeted at non-technical ERP users. The user explicitly requested a 'white blue color scheme like repnet.vercel.app'. Use a clean, Swiss brutalist aesthetic, utilizing ample whitespace, crisp grid borders, electric blue accents, and high-fidelity typography. Avoid generic SaaS defaults; aim for a high-end, authoritative, enterprise vibe. DO NOT USE PLACEHOLDER IMAGES. Use only the provided `media_assets`.",
+  "color_palette": {
+    "primary": "#0055FF",
+    "primary_hover": "#0044CC",
+    "background": "#FFFFFF",
+    "surface": "#F8FAFC",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "border": "#E2E8F0",
+    "accent_glow": "#3B82F6"
+  },
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Manrope",
+    "h1": "text-5xl sm:text-6xl tracking-tighter font-semibold text-slate-900",
+    "h2": "text-3xl sm:text-4xl tracking-tight font-medium text-slate-900",
+    "h3": "text-xl sm:text-2xl font-medium text-slate-800",
+    "body": "text-base leading-relaxed text-slate-600",
+    "labels": "text-xs font-bold uppercase tracking-[0.2em] text-blue-600"
+  },
+  "layout_spacing": {
+    "container_padding": "px-6 md:px-12 lg:px-24",
+    "section_spacing": "py-24 md:py-32",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+    "border_radius": "rounded-lg" 
+  },
+  "surfaces_and_visual_enhancers": {
+    "header": "Crystal Glass: fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/50 transition-all",
+    "card_default": "Grid Borders: bg-white border border-slate-200 rounded-lg p-8 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,85,255,0.06)] hover:border-blue-500/30 transition-all duration-300",
+    "glass": "bg-white/80 backdrop-blur-xl border border-white/40 shadow-sm",
+    "pro_pricing_card": "Tracing Beam: Add a 1px solid primary color border with a subtle outer glow (drop-shadow-[0_0_12px_rgba(0,85,255,0.2)]) to signify premium tier."
+  },
+  "components": {
+    "button_primary": "bg-[#0055FF] text-white hover:bg-[#0044CC] px-6 py-3 rounded-md font-medium transition-colors focus:ring-2 focus:ring-blue-500 focus:outline-none",
+    "button_secondary": "bg-transparent text-slate-700 hover:text-slate-900 border border-slate-200 hover:border-slate-300 px-6 py-3 rounded-md font-medium transition-colors"
+  },
+  "shadcn_components_to_use": [
+    "Button",
+    "Input",
+    "Textarea",
+    "Form",
+    "Label",
+    "Card (use sparingly, prefer raw divs with `card_default` styles for bento grids)",
+    "Tabs (for the Interactive Documentation Viewer)",
+    "Dialog"
+  ],
+  "sections_breakdown": [
+    {
+      "id": "hero",
+      "type": "Hero Section",
+      "design_instructions": "Central massive H1, crisp subtitle. High-impact demo preview. Behind the hero text or adjacent, use the `hero_ai_dashboard` image as a visually stunning background/overlay, heavily masked or faded into pure white at the edges (e.g., bg-gradient-to-b from-transparent to-white). Use crystal glass for the floating nav above it.",
+      "components_needed": ["Header", "Button_Primary", "Button_Secondary"]
+    },
+    {
+      "id": "logos",
+      "type": "Logo Strip",
+      "design_instructions": "Horizontal marquee of the partner logos representing target ERPs (SYSPRO, Acumatica, Sage, Epicor). Greyscale them using CSS filters to maintain the Swiss aesthetic (`grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500`)."
+    },
+    {
+      "id": "features",
+      "type": "Bento Grid",
+      "design_instructions": "Grid MODE B (Control Room). Dense, crisp. 4 main features: NL to SQL (col-span-1 md:col-span-2), Chart Gen (col-span-1), Dashboard Builder (col-span-1 md:col-span-2), Anomaly Detection (col-span-1). Use lucide-react icons in duotone/blue tint. Each bento card should have a 1px border, white background, relying on `card_default`."
+    },
+    {
+      "id": "architecture",
+      "type": "Project Architecture Preview",
+      "design_instructions": "A technical 'deep dive' section showcasing how the AI connects to ERP. Two-column layout: left text (Swiss layout, heavily aligned), right image (`architecture_diagram`) with a 1px border and subtle shadow."
+    },
+    {
+      "id": "documentation",
+      "type": "Interactive Documentation Viewer",
+      "design_instructions": "Use Shadcn Tabs. Left sidebar for doc topics, right pane for code/API examples using strict mono font (JetBrains Mono or standard ui-monospace). Highlight the 'AI agent' setup with crisp borders."
+    },
+    {
+      "id": "pricing",
+      "type": "Pricing Table",
+      "design_instructions": "3 columns. Starter, Pro, Enterprise. Distinct hierarchy. Flat backgrounds, primary CTA in Pro tier, secondary in others. Pro tier must use the `pro_pricing_card` style."
+    },
+    {
+      "id": "contact_waitlist",
+      "type": "Contact / Waitlist",
+      "design_instructions": "Centered, narrow column to maintain readability. Input fields customized with `focus:ring-2 focus:ring-blue-500` and `border-slate-200`. Clean, zero friction. Use a minimal form."
+    }
+  ],
+  "media_assets": {
+    "hero_background": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/2e505fba189137fd9c570f2ce59e906eb741c9704edbc47a95a8902ce38dc051.png",
+      "description": "Abstract AI dashboard visualization for hero section. Apply linear mask to blend with white background."
+    },
+    "architecture_diagram": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/75804f15bdc7f64f5f28511fff32b0f6c8db34ccbec3f7f6af3f4efb455ebeee.png",
+      "description": "Architecture blueprint to be shown in the Project Thinking section."
+    },
+    "partner_logos": [
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/b16d6877fe2259ae1d4af680ca188324ad844820c6ea81cfc164ca44c0b35135.png",
+        "description": "ERP Partner Logo 1 (SYSPRO)"
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/c90756a8c1d8fa29735ab682462ed4bbf6c2e74d516f345882229d52e4a00977.png",
+        "description": "ERP Partner Logo 2 (Acumatica)"
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/33b51baf0cc935a455b244bba0ab023f847b9c0c046a8f83742865cc8526e56a.png",
+        "description": "ERP Partner Logo 3 (Sage)"
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/1b50ded6-5f6b-43ec-bb6e-1400db92ec24/images/c0c22824ff18de96d590750ea816b69f88f1d2db0b652e1af24fa1500570f614.png",
+        "description": "ERP Partner Logo 4 (Epicor)"
+      }
+    ]
+  },
+  "technical_rules": {
+    "icons": "lucide-react",
+    "motion": "Use framer-motion for bento staggered reveal and smooth entrances.",
+    "testing": "All interactive and key informational elements MUST include `data-testid` attribute. Convention: kebab-case, role-based.",
+    "accessibility": "Ensure text colors meet APCA over white. Use focus-visible for rings."
+  }
+}
