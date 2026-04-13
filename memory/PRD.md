@@ -1,69 +1,55 @@
 # RepNet - AI Copilot for SYSPRO ERP | Landing Page
 
 ## Original Problem Statement
-Build a landing page / marketing site for "AI Copilot for SYSPRO ERP" — a SaaS web application that allows non-technical ERP users to generate reports using natural language, visualize them as charts, pin them to dashboards, and auto-detect anomalies. Target ERPs: SYSPRO, Acumatica, Sage, Epicor.
+Build a landing page / marketing site for "AI Copilot for SYSPRO ERP" — a SaaS product allowing non-technical ERP users to generate reports using natural language. White/blue color scheme.
 
 ## User Personas
 - **ERP Decision Makers**: CTOs, IT Directors evaluating the product
-- **Non-Technical Users**: Business analysts, finance teams who will use the product
+- **Non-Technical Users**: Business analysts, finance teams
 - **Potential Investors/Partners**: Reviewing product capabilities
 
 ## Architecture
-- **Frontend**: React + Tailwind CSS + Framer Motion + shadcn/ui components
-- **Backend**: FastAPI (Python) + MongoDB (Motor async driver)
-- **Design**: Swiss & High-Contrast archetype, white/blue color scheme, Outfit + Manrope fonts
+- **Frontend**: React + Tailwind CSS + Framer Motion + shadcn/ui
+- **Backend**: FastAPI (Python) + MongoDB (Motor async)
+- **Design**: Swiss & High-Contrast, white/blue, Outfit + Manrope fonts
 
-## Core Requirements (Static)
-1. Hero section with product demo preview
-2. ERP partner logo strip (SYSPRO, Acumatica, Sage, Epicor)
-3. Features bento grid (NL to SQL, Charts, Dashboard Builder, Anomaly Detection)
-4. Architecture/How It Works section
-5. Interactive Documentation Viewer (5 topics with code snippets)
-6. Project Timeline/Roadmap (6 phases, 28 weeks)
-7. Pricing table (Starter $99, Pro $299, Enterprise Custom)
-8. Waitlist signup form (stored in MongoDB)
-9. Contact form (stored in MongoDB)
-10. Responsive footer with social links
+## What's Been Implemented
 
-## What's Been Implemented (2026-04-13)
-- [x] Full landing page with all 10 sections
-- [x] Backend APIs: /api/waitlist (POST, GET count), /api/contact (POST)
-- [x] Crystal glass header with smooth scroll navigation
-- [x] Hero section with animated demo preview card
-- [x] Logo strip with marquee animation
-- [x] Bento grid features with code/chart previews
-- [x] Architecture diagram with data flow visualization
-- [x] Interactive docs viewer with 5 topics (Overview, Tech Stack, API, Security, AI)
-- [x] 6-phase project timeline
-- [x] 3-tier pricing with highlighted Pro plan
-- [x] Waitlist form with success state + duplicate detection
-- [x] Contact form with success state
-- [x] Mobile responsive with hamburger menu
-- [x] Framer Motion animations throughout
-- [x] All elements have data-testid attributes
+### V1 (2026-04-13) - MVP Landing Page
+- [x] 10 sections: Hero, Logos, Features, Architecture, Docs, Timeline, Pricing, Waitlist, Contact, Footer
+- [x] Backend APIs for waitlist & contact
+
+### V2 (2026-04-13) - Interactive Upgrade
+- [x] Typing animation in hero cycling through query examples
+- [x] Scroll progress bar in header
+- [x] Active section indicator with animated pill
+- [x] Spotlight hover effects on feature cards
+- [x] Animated gradient orbs & dot grid backgrounds
+- [x] Parallax scrolling in hero
+- [x] Animated counter stats
+- [x] Monthly/Yearly pricing toggle
+- [x] Social proof waitlist counter
+- [x] Animated gradient border on Pro pricing card
+- [x] All framer-motion entrance animations
+
+### V3 (2026-04-13) - User-Facing Content Overhaul
+- [x] **Replaced** technical timeline → "Why RepNet" benefits section (6 user-facing cards)
+- [x] **Replaced** technical docs viewer → Product Showcase with REAL product screenshots (3 tabs: Ask a Question, View Analytics, Manage Connections)
+- [x] **Replaced** technical architecture → "How It Works" 4 user-facing steps
+- [x] Browser chrome frame around screenshots for premium feel
+- [x] All content now user-facing (not pitch-deck/technical)
 
 ## Testing Status
-- All 18 tests passing (backend API + frontend UI + mobile responsive + E2E form submission)
+- V3: 100% pass (Backend 7/7, Frontend 15/15)
 
-## Prioritized Backlog
-### P0 (Critical)
-- None remaining for landing page MVP
-
-### P1 (High)
-- Email notifications for new waitlist signups
-- Analytics tracking (Google Analytics / Plausible)
+## Backlog
+### P1
 - SEO meta tags and Open Graph images
-- Performance optimization (lazy loading images)
+- Email notifications for waitlist signups
+- Analytics tracking (GA / Plausible)
 
-### P2 (Medium)
-- Blog/content section
-- Customer testimonial carousel
+### P2
 - FAQ accordion section
+- Customer testimonials
+- Blog section
 - Dark mode toggle
-- Cookie consent banner
-
-## Next Tasks
-1. Add SEO meta tags and OG images for social sharing
-2. Integrate email notifications for waitlist entries
-3. Add analytics tracking
-4. Create a blog section for content marketing
