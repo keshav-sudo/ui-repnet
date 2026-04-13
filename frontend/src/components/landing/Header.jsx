@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Zap } from "lucide-react";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -12,9 +12,26 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
+
+      // Detect active section
+      const sections = navLinks.map(l => l.href.replace("#", ""));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 150) {
+          setActiveSection(sections[i]);
+          return;
+        }
+      }
+      setActiveSection("");
+    };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -26,95 +43,133 @@ export default function Header() {
   };
 
   return (
-    <motion.header
-      data-testid="header-nav"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-xl border-b border-slate-200/60 shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" data-testid="header-logo" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-[#0055FF] flex items-center justify-center">
-              <span className="text-white font-bold text-sm font-['Outfit']">R</span>
-            </div>
-            <span className="text-lg font-semibold text-slate-900 font-['Outfit'] tracking-tight">
-              RepNet
-            </span>
-          </a>
+    <>
+      {/* Scroll Progress */}
+      <div
+        className="scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+        data-testid="scroll-progress"
+      />
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8" data-testid="desktop-nav">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                data-testid={`nav-link-${link.label.toLowerCase()}`}
-                onClick={() => scrollTo(link.href)}
-                className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+      <motion.header
+        data-testid="header-nav"
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-white/75 backdrop-blur-2xl border-b border-slate-200/50 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <a href="#" data-testid="header-logo" className="flex items-center gap-2.5 group">
+              <motion.div
+                whileHover={{ rotate: [0, -10, 10, 0], scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+                className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0055FF] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-blue-500/20"
               >
-                {link.label}
-              </button>
-            ))}
-          </nav>
+                <Zap size={14} className="text-white" fill="white" />
+              </motion.div>
+              <span className="text-lg font-semibold text-slate-900 font-['Outfit'] tracking-tight">
+                RepNet
+              </span>
+            </a>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <button
-              data-testid="nav-waitlist-btn"
-              onClick={() => scrollTo("#waitlist")}
-              className="bg-[#0055FF] text-white hover:bg-[#0044CC] px-5 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              Join Waitlist
-            </button>
-          </div>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-1" data-testid="desktop-nav">
+              {navLinks.map((link) => {
+                const sectionId = link.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return (
+                  <button
+                    key={link.href}
+                    data-testid={`nav-link-${link.label.toLowerCase()}`}
+                    onClick={() => scrollTo(link.href)}
+                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-md ${
+                      isActive
+                        ? "text-[#0055FF]"
+                        : "text-slate-500 hover:text-slate-900"
+                    }`}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-active"
+                        className="absolute inset-0 bg-blue-50/80 rounded-md -z-10"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
 
-          {/* Mobile toggle */}
-          <button
-            data-testid="mobile-menu-toggle"
-            className="md:hidden p-2 text-slate-600"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200"
-            data-testid="mobile-menu"
-          >
-            <div className="px-6 py-4 space-y-3">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollTo(link.href)}
-                  className="block w-full text-left text-sm font-medium text-slate-600 hover:text-slate-900 py-2"
-                >
-                  {link.label}
-                </button>
-              ))}
-              <button
+            {/* CTA */}
+            <div className="hidden md:flex items-center gap-3">
+              <motion.button
+                data-testid="nav-waitlist-btn"
                 onClick={() => scrollTo("#waitlist")}
-                className="w-full bg-[#0055FF] text-white hover:bg-[#0044CC] px-5 py-2.5 rounded-md text-sm font-medium transition-colors mt-2"
+                whileHover={{ scale: 1.03, boxShadow: "0 8px 30px rgba(0,85,255,0.25)" }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-gradient-to-r from-[#0055FF] to-[#3B82F6] text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-lg shadow-blue-500/20"
               >
                 Join Waitlist
-              </button>
+              </motion.button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+
+            {/* Mobile toggle */}
+            <motion.button
+              data-testid="mobile-menu-toggle"
+              className="md:hidden p-2 text-slate-600"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              whileTap={{ scale: 0.9 }}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden bg-white/95 backdrop-blur-2xl border-b border-slate-200"
+              data-testid="mobile-menu"
+            >
+              <div className="px-6 py-4 space-y-1">
+                {navLinks.map((link, i) => (
+                  <motion.button
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={() => scrollTo(link.href)}
+                    className="block w-full text-left text-sm font-medium text-slate-600 hover:text-[#0055FF] hover:bg-blue-50/50 py-2.5 px-3 rounded-lg transition-all"
+                  >
+                    {link.label}
+                  </motion.button>
+                ))}
+                <motion.button
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  onClick={() => scrollTo("#waitlist")}
+                  className="w-full bg-gradient-to-r from-[#0055FF] to-[#3B82F6] text-white px-5 py-2.5 rounded-lg text-sm font-medium mt-3"
+                >
+                  Join Waitlist
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </>
   );
 }

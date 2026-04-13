@@ -1,13 +1,14 @@
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import { Github, Twitter, Linkedin, Mail, Zap } from "lucide-react";
 
 const footerLinks = [
   {
     title: "Product",
     links: [
       { label: "Features", href: "#features" },
+      { label: "How It Works", href: "#architecture" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Documentation", href: "#documentation" },
-      { label: "Changelog", href: "#" },
+      { label: "See It In Action", href: "#documentation" },
     ],
   },
   {
@@ -39,37 +40,39 @@ export default function Footer() {
   };
 
   return (
-    <footer data-testid="footer" className="border-t border-slate-200 bg-white">
+    <footer data-testid="footer" className="border-t border-slate-100 bg-gradient-to-b from-white to-slate-50/80 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-[#0055FF] flex items-center justify-center">
-                <span className="text-white font-bold text-sm font-['Outfit']">R</span>
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0055FF] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <Zap size={14} className="text-white" fill="white" />
               </div>
-              <span className="text-lg font-semibold text-slate-900 font-['Outfit'] tracking-tight">
+              <span className="text-lg font-bold text-slate-900 font-['Outfit'] tracking-tight">
                 RepNet
               </span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
               AI-powered ERP reporting for non-technical users. Generate reports in seconds, not days.
             </p>
-            <div className="flex gap-3 mt-5">
+            <div className="flex gap-2.5 mt-6">
               {[
                 { icon: Twitter, label: "twitter" },
                 { icon: Linkedin, label: "linkedin" },
                 { icon: Github, label: "github" },
                 { icon: Mail, label: "email" },
               ].map(({ icon: Icon, label }) => (
-                <a
+                <motion.a
                   key={label}
                   href="#"
                   data-testid={`footer-social-${label}`}
-                  className="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-[#0055FF] hover:border-blue-200 transition-all"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-10 h-10 rounded-xl border border-slate-200/80 flex items-center justify-center text-slate-400 hover:text-[#0055FF] hover:border-blue-200 hover:bg-blue-50/30 transition-all"
                 >
                   <Icon size={15} />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -77,16 +80,16 @@ export default function Footer() {
           {/* Link columns */}
           {footerLinks.map((col) => (
             <div key={col.title}>
-              <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-4 font-['Outfit']">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5 font-['Outfit']">
                 {col.title}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <button
                       onClick={() => scrollTo(link.href)}
                       data-testid={`footer-link-${link.label.toLowerCase()}`}
-                      className="text-sm text-slate-500 hover:text-slate-900 transition-colors"
+                      className="text-sm text-slate-500 hover:text-[#0055FF] transition-colors hover-underline"
                     >
                       {link.label}
                     </button>
@@ -98,7 +101,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-16 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-slate-400">
             &copy; {new Date().getFullYear()} RepNet. All rights reserved.
           </p>

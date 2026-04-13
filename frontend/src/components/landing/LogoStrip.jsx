@@ -9,29 +9,33 @@ const logos = [
 
 export default function LogoStrip() {
   return (
-    <section data-testid="logo-strip" className="py-16 border-y border-slate-100 bg-slate-50/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+    <section data-testid="logo-strip" className="py-14 border-y border-slate-100/80 relative overflow-hidden">
+      {/* Subtle bg */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-50/50 via-white to-slate-50/50" />
+      
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-10"
+          className="text-center text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-8"
         >
-          Works with leading ERP systems
+          Trusted by teams using leading ERP systems
         </motion.p>
         <div className="overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50/90 to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50/90 to-transparent z-10" />
-          <div className="flex animate-marquee items-center gap-20">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className="flex animate-marquee items-center gap-16">
             {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
-              <div
+              <motion.div
                 key={`${logo.name}-${i}`}
-                className="flex-shrink-0 flex items-center gap-3 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
+                whileHover={{ scale: 1.08 }}
+                className="flex-shrink-0 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer px-4 py-2 rounded-lg hover:bg-blue-50/30"
                 data-testid={`logo-${logo.name.toLowerCase()}-${i}`}
               >
-                <img src={logo.url} alt={logo.name} className="h-10 w-auto object-contain" />
+                <img src={logo.url} alt={logo.name} className="h-9 w-auto object-contain" />
                 <span className="text-sm font-semibold text-slate-600 font-['Outfit'] whitespace-nowrap">{logo.name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -1,130 +1,114 @@
 import { motion } from "framer-motion";
-import { Calendar, Code2, Rocket, TestTube, Users, Layers } from "lucide-react";
+import { Clock, DollarSign, Users, Shield, TrendingUp, Zap } from "lucide-react";
 
-const phases = [
+const benefits = [
   {
-    icon: Code2,
-    weeks: "Weeks 1-4",
-    title: "Foundation & Core Engine",
-    items: [
-      "Auth + multi-tenant architecture",
-      "ERP database connection layer",
-      "Schema metadata extraction",
-      "NL to SQL AI pipeline (v1)",
-    ],
-    color: "bg-blue-50 text-blue-600 border-blue-100",
+    icon: Clock,
+    stat: "95%",
+    label: "Time Saved",
+    desc: "Reports that took hours or days now take seconds to generate.",
+    color: "text-blue-600",
+    bg: "bg-blue-50",
+    border: "border-blue-100",
   },
   {
-    icon: Layers,
-    weeks: "Weeks 5-10",
-    title: "Reporting & Visualization",
-    items: [
-      "Chat UI for natural language queries",
-      "Table report with drag-and-drop columns",
-      "One-click chart conversion",
-      "AI chart type recommendation",
-    ],
-    color: "bg-indigo-50 text-indigo-600 border-indigo-100",
-  },
-  {
-    icon: Rocket,
-    weeks: "Weeks 11-16",
-    title: "Dashboards & Sharing",
-    items: [
-      "Dashboard builder (grid layout)",
-      "Pin reports to dashboards",
-      "Share links with permissions",
-      "Report history & re-run",
-    ],
-    color: "bg-violet-50 text-violet-600 border-violet-100",
-  },
-  {
-    icon: TestTube,
-    weeks: "Weeks 17-20",
-    title: "Polish & Beta Launch",
-    items: [
-      "Error handling & edge cases",
-      "Performance optimization",
-      "Security audit & penetration testing",
-      "Beta launch with 10 customers",
-    ],
-    color: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    icon: DollarSign,
+    stat: "$2K+",
+    label: "Saved Per Report",
+    desc: "Eliminate the need to hire report writers at $500-$2,000 each.",
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+    border: "border-emerald-100",
   },
   {
     icon: Users,
-    weeks: "Weeks 21-24",
-    title: "Phase 2 - Anomaly & Tasks",
-    items: [
-      "Anomaly detection engine",
-      "Scheduled monitoring jobs",
-      "Task creation (Trello integration)",
-      "Workflow automation hooks",
-    ],
-    color: "bg-amber-50 text-amber-600 border-amber-100",
+    stat: "Any User",
+    label: "No SQL Required",
+    desc: "Finance, operations, sales — anyone can generate reports instantly.",
+    color: "text-violet-600",
+    bg: "bg-violet-50",
+    border: "border-violet-100",
   },
   {
-    icon: Calendar,
-    weeks: "Weeks 25-28",
-    title: "Scale & GA Launch",
-    items: [
-      "SSO / SAML integration",
-      "On-premise deployment option",
-      "Marketing site & documentation",
-      "General availability launch",
-    ],
-    color: "bg-rose-50 text-rose-600 border-rose-100",
+    icon: Shield,
+    stat: "100%",
+    label: "Data Stays Yours",
+    desc: "Read-only connections. AES-256 encryption. Your data never leaves your servers.",
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+    border: "border-amber-100",
+  },
+  {
+    icon: TrendingUp,
+    stat: "24/7",
+    label: "Anomaly Monitoring",
+    desc: "AI watches your metrics around the clock and alerts you when something's off.",
+    color: "text-rose-600",
+    bg: "bg-rose-50",
+    border: "border-rose-100",
+  },
+  {
+    icon: Zap,
+    stat: "4+ ERPs",
+    label: "Universal Support",
+    desc: "Works with SYSPRO, Acumatica, Sage, Epicor — and more coming soon.",
+    color: "text-sky-600",
+    bg: "bg-sky-50",
+    border: "border-sky-100",
   },
 ];
 
-export default function TimelineSection() {
+export default function WhyRepNetSection() {
   return (
-    <section id="timeline" data-testid="timeline-section" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+    <section id="why-repnet" data-testid="timeline-section" className="py-28 md:py-36 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/50 to-white" />
+      <div className="absolute inset-0 dot-grid opacity-[0.2]" />
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 font-['Outfit']">
-            Roadmap
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 font-['Outfit'] bg-blue-50 px-3 py-1 rounded-full">
+            Why RepNet
           </span>
-          <h2 className="text-3xl sm:text-4xl tracking-tight font-medium text-slate-900 font-['Outfit'] mt-3">
-            Project timeline
+          <h2 className="text-4xl sm:text-5xl tracking-tight font-bold text-slate-900 font-['Outfit'] mt-5 leading-[1.1]">
+            Built for teams who are{" "}
+            <span className="bg-gradient-to-r from-[#0055FF] to-[#6366F1] bg-clip-text text-transparent">
+              tired of waiting
+            </span>{" "}
+            for reports
           </h2>
-          <p className="text-base text-slate-500 mt-3 max-w-md mx-auto">
-            28-week development plan from foundation to general availability.
+          <p className="text-lg text-slate-500 mt-4">
+            Real results from day one. No training needed. No consultants required.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {phases.map((phase, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {benefits.map((b, i) => (
             <motion.div
-              key={phase.weeks}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={b.label}
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               data-testid={`timeline-phase-${i}`}
-              className="bg-white border border-slate-200 rounded-lg p-6 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,85,255,0.06)] hover:border-blue-500/20 transition-all duration-300"
+              className="group"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-9 h-9 rounded-lg border flex items-center justify-center ${phase.color}`}>
-                  <phase.icon size={16} />
+              <div className={`bg-white rounded-2xl border ${b.border} p-7 h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/[0.05]`}>
+                <div className="flex items-start justify-between mb-5">
+                  <div className={`w-12 h-12 rounded-xl ${b.bg} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <b.icon size={22} className={b.color} />
+                  </div>
+                  <span className={`text-3xl font-black font-['Outfit'] ${b.color} tracking-tight opacity-90`}>
+                    {b.stat}
+                  </span>
                 </div>
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{phase.weeks}</span>
-                  <h3 className="text-sm font-semibold text-slate-900 font-['Outfit'] leading-tight">{phase.title}</h3>
-                </div>
+                <h3 className="text-lg font-semibold text-slate-900 font-['Outfit'] mb-1.5">{b.label}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{b.desc}</p>
               </div>
-              <ul className="space-y-2">
-                {phase.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <div className="w-1 h-1 rounded-full bg-slate-300 mt-2 flex-shrink-0" />
-                    <span className="text-sm text-slate-500">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           ))}
         </div>
